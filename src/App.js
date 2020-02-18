@@ -22,7 +22,7 @@ function App() {
         Minesweeper
       </header>
 
-      <Playground size={size}/>
+      {size && <Playground size={size}/>}
       <Menu sizes={sizes} size={size} setSize={setSize}/>
     </div>
   );
