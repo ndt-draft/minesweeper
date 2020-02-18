@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
+import _ from 'lodash'
 import Button from './Button'
 
 const makeGameData = () => {
   const mines = [{"x":4,"y":4},{"x":5,"y":1},{"x":4,"y":5},{"x":0,"y":0},{"x":6,"y":0},{"x":5,"y":2},{"x":8,"y":5},{"x":3,"y":1},{"x":2,"y":4},{"x":0,"y":8}]
 
-  const size = 9
+  const size = 9 // change to lower number to test win faster
 
   const buttons = new Array(size).fill().map((a, x) => {
     return new Array(size).fill({mine: false, hint: 0, clicked: false}).map((b, y) => {
@@ -82,6 +83,10 @@ const revealAllHints = (data) => {
   return newData
 }
 
+const isRevealedAllHints = (data) => {
+  return !_.flatten(data).some(button => !button.mine && !button.clicked)
+}
+
 const Playground = () => {
   const [status, setStatus] = useState('playing') // playing/win/lose
   const [data, setData] = useState(makeGameData())
@@ -111,13 +116,34 @@ const Playground = () => {
     // not mine
     } else {
       newData[button.x][button.y].clicked = true
+
+      if (isRevealedAllHints(newData)) {
+        setStatus('win')
+        endGame()
+        return
+      }
+
       setData(newData)
+    }
+  }
+
+  const getStatusText = () => {
+    switch (status) {
+      case 'lose':
+        return 'Cry :('
+      case 'win':
+        return 'Win'
+      case 'playing':
+      default:
+        return 'Smile'
     }
   }
 
   return (
     <div>
-      <button onClick={resetGame}>{status === 'lose' ? 'Cry :(' : 'Smile'}</button>
+      <button onClick={resetGame}>
+        {getStatusText()}
+      </button>
       {data.map(row =>
         <div className="row">
           {row.map(button =>
