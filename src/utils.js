@@ -1,27 +1,26 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 import _ from 'lodash'
 
 export const withMinesData = (Component) => {
   return (props) => {
     const [mines, setMines] = useState([])
-    const [size, setSize] = useState(9)
 
-    const fetchMines = async (size) => {
+    const fetchMines = useCallback(async () => {
       try {
-        let minesResponse = await fetchMinesData(size)
+        let minesResponse = await fetchMinesData(props.size)
         setMines(minesResponse.data)
       } catch (e) {
         // error fetching mines data
       }
-    }
+    }, [props.size])
 
     useEffect(() => {
-      fetchMines(size)
-    }, [size])
+      fetchMines()
+    }, [fetchMines])
 
     return mines.length === 0 ?
       <div>Loading...</div> :
-      <Component size={size} mines={mines} fetchMines={fetchMines} setSize={setSize}/>
+      <Component size={props.size} mines={mines} fetchMines={fetchMines}/>
   }
 }
 

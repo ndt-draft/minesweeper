@@ -9,7 +9,7 @@ function App() {
         Minesweeper
       </header>
 
-      <Playground/>
+      <Playground size={9}/>
     </div>
   );
 }
