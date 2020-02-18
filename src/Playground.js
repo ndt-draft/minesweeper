@@ -71,16 +71,11 @@ const makeGameData = () => {
   return buttons
 }
 
-const revealAllHints = (data) => {
-  const newData = [...data]
-
-  newData.forEach(row => {
-    row.forEach(button => {
-      button.clicked = true
-    })
-  })
-
-  return newData
+const revealAllMines = (data) => {
+  return _.chunk(
+    _.flatten(data).map(button => button.mine ? {...button, clicked: true} : button),
+    data.length
+  )
 }
 
 const isRevealedAllHints = (data) => {
@@ -97,12 +92,12 @@ const Playground = () => {
   }
 
   const endGame = () => {
-    setData(revealAllHints(data))
+    setData(revealAllMines(data))
   }
 
   const clickButton = (button) => {
     // skip if already clicked
-    if (button.clicked) {
+    if (button.clicked || status === 'lose') {
       return
     }
     let newData = [...data]
@@ -116,14 +111,14 @@ const Playground = () => {
     // not mine
     } else {
       newData[button.x][button.y].clicked = true
+      setData(newData)
 
+      // is win
       if (isRevealedAllHints(newData)) {
         setStatus('win')
         endGame()
         return
       }
-
-      setData(newData)
     }
   }
 
