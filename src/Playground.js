@@ -58,7 +58,7 @@ const Playground = props => {
   }
 
   return (
-    <div>
+    <div className="playground">
       <button onClick={resetGame}>
         {getStatusText()}
       </button>
