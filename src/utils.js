@@ -118,8 +118,6 @@ export const makeGameData = (size, mines) => {
     })
   })
 
-  console.log(buttons)
-
   return buttons
 }
 
@@ -132,4 +130,76 @@ export const revealAllMines = (data) => {
 
 export const isRevealedAllHints = (data) => {
   return !_.flatten(data).some(button => !button.mine && !button.clicked)
+}
+
+export const spreadEmptySurroundButtons = (button, data) => {
+  return recursiveSpreadEmptyButtons([button], data)
+}
+
+const recursiveSpreadEmptyButtons = (emptyButtons, data) => {
+  if (emptyButtons.length === 0) {
+    return data
+  }
+
+  let surroundButtons = [
+    // previous row
+    {
+      x: emptyButtons[0].x - 1,
+      y: emptyButtons[0].y - 1
+    },
+    {
+      x: emptyButtons[0].x - 1,
+      y: emptyButtons[0].y
+    },
+    {
+      x: emptyButtons[0].x - 1,
+      y: emptyButtons[0].y + 1
+    },
+    // same row
+    {
+      x: emptyButtons[0].x,
+      y: emptyButtons[0].y - 1
+    },
+    {
+      x: emptyButtons[0].x,
+      y: emptyButtons[0].y + 1
+    },
+    // next row
+    {
+      x: emptyButtons[0].x + 1,
+      y: emptyButtons[0].y - 1
+    },
+    {
+      x: emptyButtons[0].x + 1,
+      y: emptyButtons[0].y
+    },
+    {
+      x: emptyButtons[0].x + 1,
+      y: emptyButtons[0].y + 1
+    },
+  ]
+
+  surroundButtons.forEach(surroundButton => {
+    if (
+      data[surroundButton.x] &&
+      data[surroundButton.x][surroundButton.y] &&
+      data[surroundButton.x][surroundButton.y].clicked !== true &&
+      (
+        data[surroundButton.x][surroundButton.y].hint === 0 ||
+        data[surroundButton.x][surroundButton.y].mine !== true
+      )
+    ) {
+      // click empty or barrier
+      data[surroundButton.x][surroundButton.y].clicked = true
+
+      // push only empty button
+      if (data[surroundButton.x][surroundButton.y].hint === 0) {
+        emptyButtons.push(data[surroundButton.x][surroundButton.y])
+      }
+    }
+  })
+
+  emptyButtons.shift()
+
+  return recursiveSpreadEmptyButtons(emptyButtons, data)
 }

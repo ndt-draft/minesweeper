@@ -1,5 +1,11 @@
 import React, {useState} from 'react'
-import {withMinesData, makeGameData, revealAllMines, isRevealedAllHints} from './utils'
+import {
+  withMinesData,
+  makeGameData,
+  revealAllMines,
+  isRevealedAllHints,
+  spreadEmptySurroundButtons
+} from './utils'
 import Button from './Button'
 
 const Playground = props => {
@@ -30,18 +36,22 @@ const Playground = props => {
       setStatus('lose')
       endGame()
       return
+    }
 
     // not mine
-    } else {
-      newData[button.x][button.y].clicked = true
-      setData(newData)
+    newData[button.x][button.y].clicked = true
+    setData(newData)
 
-      // is win
-      if (isRevealedAllHints(newData)) {
-        setStatus('win')
-        endGame()
-        return
-      }
+    // is win
+    if (isRevealedAllHints(newData)) {
+      setStatus('win')
+      endGame()
+      return
+    }
+
+    // spread empty surround buttons until reach barrier
+    if (button.hint === 0) {
+      setData(spreadEmptySurroundButtons(button, newData))
     }
   }
 
