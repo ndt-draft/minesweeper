@@ -6,7 +6,7 @@ const Button = props => {
   const getButtonText = () => {
     if (props.clicked) {
       if (props.mine) {
-        return 'x'
+        return ''
       }
 
       return props.hint || ''
@@ -20,7 +20,7 @@ const Button = props => {
       square: true,
       clicked: props.clicked,
       hint: props.clicked && props.hint,
-      mine: props.clicked && props.mine
+      bomb: props.clicked && props.mine
     })} onClick={props.clickButton}>
       &nbsp;
       {getButtonText()}

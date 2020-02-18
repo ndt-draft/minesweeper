@@ -83,26 +83,12 @@ const Playground = props => {
     }
   }
 
-  const getStatusText = () => {
-    switch (status) {
-      case 'lose':
-        return 'Cry :('
-      case 'win':
-        return 'Win'
-      case 'playing':
-      default:
-        return 'Smile'
-    }
-  }
-
   return (
     <div className="playground" style={{
       width: 30 * props.size
     }}>
       <header>
-        <button onClick={resetGame}>
-          {getStatusText()}
-        </button>
+        <button className={'status ' + status} onClick={resetGame}/>
         <span className="elapsed-time">
           {pad(elapsedTime, 3)}
         </span>

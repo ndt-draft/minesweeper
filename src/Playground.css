@@ -3,6 +3,27 @@
   position: relative;
 }
 
+.status {
+  background-image: url('./images/sun.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  outline: none;
+}
+
+.playing {
+  background-position: 0 0;
+}
+
+.win {
+  background-position: -60px 0;
+}
+
+.lose {
+  background-position: -90px 0;
+}
+
 .elapsed-time {
   position: absolute;
   right: 0;
