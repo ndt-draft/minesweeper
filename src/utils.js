@@ -18,6 +18,10 @@ export const withMinesData = (Component) => {
       fetchMines()
     }, [fetchMines])
 
+    if (props.size === null) {
+      return <div/>
+    }
+
     return mines.length === 0 ?
       <div>Loading...</div> :
       <Component size={props.size} mines={mines} fetchMines={fetchMines}/>

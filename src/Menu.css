@@ -1,0 +1,10 @@
+.size-option {
+  margin: auto;
+}
+
+.size-option span {
+  display: inline-block;
+  margin-left: 10px;
+  width: 120px;
+  text-align: left;
+}
