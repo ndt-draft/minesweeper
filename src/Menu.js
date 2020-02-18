@@ -20,7 +20,7 @@ const Menu = props => {
       <b>Select level</b>
 
       {props.sizes.map(s =>
-        <div className="size-option">
+        <div key={s.value} className="size-option">
           <label>
             <input required name="size" type="radio" value={s.value}/><span>{s.label}</span>
           </label>
