@@ -26,7 +26,7 @@ const Playground = props => {
 
   const clickButton = (button) => {
     // skip if already clicked or lose
-    if (button.clicked || status === 'lose') {
+    if (button.clicked || status !== 'playing') {
       return
     }
     let newData = [...data]
@@ -45,13 +45,17 @@ const Playground = props => {
     // is win
     if (isRevealedAllHints(newData)) {
       setStatus('win')
-      endGame()
       return
     }
 
     // spread empty surround buttons until reach barrier
     if (button.hint === 0) {
-      setData(spreadEmptySurroundButtons(button, newData))
+      newData = spreadEmptySurroundButtons(button, newData)
+      setData(newData)
+
+      if (isRevealedAllHints(newData)) {
+        setStatus('win')
+      }
     }
   }
 
