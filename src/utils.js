@@ -203,3 +203,10 @@ const recursiveSpreadEmptyButtons = (emptyButtons, data) => {
 
   return recursiveSpreadEmptyButtons(emptyButtons, data)
 }
+
+// @see https://stackoverflow.com/a/2998822
+export function pad(num, size) {
+  var s = num + "";
+  while (s.length < size) s = "0" + s;
+  return s;
+}

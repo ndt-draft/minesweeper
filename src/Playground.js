@@ -1,16 +1,34 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   withMinesData,
   makeGameData,
   revealAllMines,
   isRevealedAllHints,
-  spreadEmptySurroundButtons
+  spreadEmptySurroundButtons,
+  pad
 } from './utils'
+import './Playground.css'
 import Button from './Button'
 
 const Playground = props => {
+  const [elapsedTime, setElapsedTime] = useState(0)
   const [status, setStatus] = useState('playing') // playing/win/lose
   const [data, setData] = useState(makeGameData(props.size, props.mines))
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (elapsedTime === 0) return
+      setElapsedTime(elapsedTime + 1)
+    }, 1000)
+
+    if (status !== 'playing') {
+      clearTimeout(timeout)
+    }
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [elapsedTime, status])
 
   const resetGame = () => {
     // fetch new mines data
@@ -29,6 +47,12 @@ const Playground = props => {
     if (button.clicked || status !== 'playing') {
       return
     }
+
+    // start time
+    if (elapsedTime === 0) {
+      setElapsedTime(1)
+    }
+
     let newData = [...data]
 
     // click on mine
@@ -72,10 +96,17 @@ const Playground = props => {
   }
 
   return (
-    <div className="playground">
-      <button onClick={resetGame}>
-        {getStatusText()}
-      </button>
+    <div className="playground" style={{
+      width: 30 * props.size
+    }}>
+      <header>
+        <button onClick={resetGame}>
+          {getStatusText()}
+        </button>
+        <span className="elapsed-time">
+          {pad(elapsedTime, 3)}
+        </span>
+      </header>
       {data.map((row, rowIndex) =>
         <div key={rowIndex} className="row">
           {row.map(button =>

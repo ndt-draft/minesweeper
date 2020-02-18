@@ -1,0 +1,9 @@
+.playground {
+  margin: auto;
+  position: relative;
+}
+
+.elapsed-time {
+  position: absolute;
+  right: 0;
+}
