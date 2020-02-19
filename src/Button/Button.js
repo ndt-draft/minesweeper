@@ -17,12 +17,15 @@ const Button = props => {
 
   return (
     <button className={classNames({
-      square: true,
-      clicked: props.clicked,
-      hint: props.clicked && props.hint,
-      bomb: props.clicked && props.mine,
-      boom: props.clicked && props.mine && props.boom
-    })} onClick={props.clickButton}>
+        square: true,
+        clicked: props.clicked,
+        hint: props.clicked && props.hint,
+        bomb: props.clicked && props.mine,
+        boom: props.clicked && props.mine && props.boom
+      })}
+      onClick={props.clickButton}
+      data-testid="button"
+    >
       &nbsp;
       {getButtonText()}
       &nbsp;

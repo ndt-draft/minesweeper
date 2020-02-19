@@ -25,7 +25,9 @@ function App() {
       {size && <Playground size={size} setSize={setSize}/>}
       <Menu sizes={sizes} size={size} setSize={setSize}/>
 
-      <footer className="App-footer">Made by <a href="https://github.com/thanh4890">thanh4890</a> with &hearts; </footer>
+      <footer className="App-footer">
+        Made by <a href="https://github.com/thanh4890">thanh4890</a> with &hearts;
+      </footer>
     </div>
   );
 }
