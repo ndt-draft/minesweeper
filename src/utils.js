@@ -58,6 +58,46 @@ export const fetchMinesData = (size) => {
   })
 }
 
+export const findSurroundButtons = (button) => {
+  return [
+    // previous row
+    {
+      x: button.x - 1,
+      y: button.y - 1
+    },
+    {
+      x: button.x - 1,
+      y: button.y
+    },
+    {
+      x: button.x - 1,
+      y: button.y + 1
+    },
+    // same row
+    {
+      x: button.x,
+      y: button.y - 1
+    },
+    {
+      x: button.x,
+      y: button.y + 1
+    },
+    // next row
+    {
+      x: button.x + 1,
+      y: button.y - 1
+    },
+    {
+      x: button.x + 1,
+      y: button.y
+    },
+    {
+      x: button.x + 1,
+      y: button.y + 1
+    },
+  ]
+}
+
 export const makeGameData = (size, mines) => {
   const buttons = new Array(size).fill().map((a, x) => {
     return new Array(size).fill({mine: false, hint: 0, clicked: false}).map((b, y) => {
@@ -73,43 +113,7 @@ export const makeGameData = (size, mines) => {
 
   // make hint
   mines.forEach(mine => {
-    let surroundButtons = [
-      // previous row
-      {
-        x: mine.x - 1,
-        y: mine.y - 1
-      },
-      {
-        x: mine.x - 1,
-        y: mine.y
-      },
-      {
-        x: mine.x - 1,
-        y: mine.y + 1
-      },
-      // same row
-      {
-        x: mine.x,
-        y: mine.y - 1
-      },
-      {
-        x: mine.x,
-        y: mine.y + 1
-      },
-      // next row
-      {
-        x: mine.x + 1,
-        y: mine.y - 1
-      },
-      {
-        x: mine.x + 1,
-        y: mine.y
-      },
-      {
-        x: mine.x + 1,
-        y: mine.y + 1
-      },
-    ]
+    let surroundButtons = findSurroundButtons(mine)
 
     surroundButtons.forEach(surroundButton => {
       if (buttons[surroundButton.x] && buttons[surroundButton.x][surroundButton.y]) {
@@ -141,43 +145,7 @@ const recursiveSpreadEmptyButtons = (emptyButtons, data) => {
     return data
   }
 
-  let surroundButtons = [
-    // previous row
-    {
-      x: emptyButtons[0].x - 1,
-      y: emptyButtons[0].y - 1
-    },
-    {
-      x: emptyButtons[0].x - 1,
-      y: emptyButtons[0].y
-    },
-    {
-      x: emptyButtons[0].x - 1,
-      y: emptyButtons[0].y + 1
-    },
-    // same row
-    {
-      x: emptyButtons[0].x,
-      y: emptyButtons[0].y - 1
-    },
-    {
-      x: emptyButtons[0].x,
-      y: emptyButtons[0].y + 1
-    },
-    // next row
-    {
-      x: emptyButtons[0].x + 1,
-      y: emptyButtons[0].y - 1
-    },
-    {
-      x: emptyButtons[0].x + 1,
-      y: emptyButtons[0].y
-    },
-    {
-      x: emptyButtons[0].x + 1,
-      y: emptyButtons[0].y + 1
-    },
-  ]
+  let surroundButtons = findSurroundButtons(emptyButtons[0])
 
   surroundButtons.forEach(surroundButton => {
     if (
