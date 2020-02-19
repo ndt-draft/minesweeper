@@ -108,7 +108,9 @@ const Playground = props => {
   return (
     <div className="playground" style={{
       width: 30 * props.size
-    }}>
+    }}
+      data-testid="playground"
+    >
       <header className="playground-header">
         <button className={'status ' + status} onClick={resetGame}/>
         <span className="elapsed-time">
@@ -119,7 +121,9 @@ const Playground = props => {
         <div key={rowIndex} className="row">
           {row.map(button =>
             <Button key={`${button.x}${button.y}`} {...button}
-              clickButton={clickButton.bind(this, button)} />
+              clickButton={clickButton.bind(this, button)}
+              data-testid="button"
+            />
           )}
         </div>
       )}
