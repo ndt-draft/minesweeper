@@ -1,3 +1,12 @@
+# Minesweeper
+
+## Upgrade later
+* Marker for button on right click
+* Detect both left and right mouse click at the same time near marker to explore hints
+
+## Demo playing
+![demo](https://i.imgur.com/NflJfcQ.gif)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
