@@ -1,5 +1,11 @@
+.menu-title {
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
 .size-option {
   margin: auto;
+  margin-bottom: 5px;
 }
 
 .size-option span {
@@ -7,4 +13,8 @@
   margin-left: 10px;
   width: 120px;
   text-align: left;
+}
+
+.menu-submit {
+  margin-top: 10px;
 }

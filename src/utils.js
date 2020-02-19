@@ -29,7 +29,7 @@ export const withMinesData = (Component) => {
 
     return loading ?
       <div className="loading">Loading...</div> :
-      <Component size={props.size} mines={mines} fetchMines={fetchMines}/>
+      <Component {...props} mines={mines} fetchMines={fetchMines}/>
   }
 }
 
@@ -209,4 +209,12 @@ export function pad(num, size) {
   var s = num + "";
   while (s.length < size) s = "0" + s;
   return s;
+}
+
+export function hhmmss(secs) {
+  var minutes = Math.floor(secs / 60);
+  secs = secs%60;
+  var hours = Math.floor(minutes/60)
+  minutes = minutes%60;
+  return `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(secs, 2)}`;
 }

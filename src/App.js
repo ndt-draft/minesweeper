@@ -19,11 +19,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Minesweeper
+        <h2 className="App-name">Minesweeper</h2>
       </header>
 
-      {size && <Playground size={size}/>}
+      {size && <Playground size={size} setSize={setSize}/>}
       <Menu sizes={sizes} size={size} setSize={setSize}/>
+
+      <footer className="App-footer">Made by <a href="https://github.com/thanh4890">thanh4890</a> with &hearts; </footer>
     </div>
   );
 }

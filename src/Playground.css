@@ -1,6 +1,11 @@
 .playground {
   margin: auto;
   position: relative;
+  margin-bottom: 10px;
+}
+
+.playground-header {
+  margin-bottom: 10px;
 }
 
 .status {
@@ -10,6 +15,10 @@
   width: 32px;
   height: 32px;
   outline: none;
+}
+
+.loading {
+  margin: 10px;
 }
 
 .playing {
@@ -27,4 +36,5 @@
 .elapsed-time {
   position: absolute;
   right: 0;
+  line-height: 32px;
 }

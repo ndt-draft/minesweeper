@@ -5,10 +5,11 @@ import {
   revealAllMines,
   isRevealedAllHints,
   spreadEmptySurroundButtons,
-  pad
+  hhmmss
 } from './utils'
 import './Playground.css'
 import Button from './Button'
+import EndGameModal from './EndGameModal'
 
 const Playground = props => {
   const [elapsedTime, setElapsedTime] = useState(0)
@@ -38,8 +39,13 @@ const Playground = props => {
     setData(makeGameData(props.size, props.mines))
   }
 
-  const endGame = () => {
+  const loseGame = () => {
+    setStatus('lose')
     setData(revealAllMines(data))
+  }
+
+  const winGame = () => {
+    setStatus('win')
   }
 
   const clickButton = (button) => {
@@ -57,8 +63,7 @@ const Playground = props => {
 
     // click on mine
     if (button.mine) {
-      setStatus('lose')
-      endGame()
+      loseGame()
       return
     }
 
@@ -68,7 +73,7 @@ const Playground = props => {
 
     // is win
     if (isRevealedAllHints(newData)) {
-      setStatus('win')
+      winGame()
       return
     }
 
@@ -78,19 +83,34 @@ const Playground = props => {
       setData(newData)
 
       if (isRevealedAllHints(newData)) {
-        setStatus('win')
+        winGame()
       }
     }
+  }
+
+  const getEndGameTitle = () => {
+    let title
+    switch (status) {
+      case 'win':
+        title = 'Won in'
+        break
+      case 'lose':
+      default:
+        title = 'Lost in'
+        break
+    }
+
+    return `${title} ${hhmmss(elapsedTime)}`
   }
 
   return (
     <div className="playground" style={{
       width: 30 * props.size
     }}>
-      <header>
+      <header className="playground-header">
         <button className={'status ' + status} onClick={resetGame}/>
         <span className="elapsed-time">
-          {pad(elapsedTime, 3)}
+          <span role="img" aria-label="img">&#9200;</span>{hhmmss(elapsedTime, 3)}
         </span>
       </header>
       {data.map((row, rowIndex) =>
@@ -101,6 +121,13 @@ const Playground = props => {
           )}
         </div>
       )}
+      <EndGameModal
+        isWinOrLose={status === 'win' || status === 'lose'}
+        title={getEndGameTitle()}
+        resetGame={resetGame}
+        changeLevel={() => props.setSize(null)}
+      >
+      </EndGameModal>
     </div>
   )
 }

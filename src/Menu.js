@@ -16,17 +16,19 @@ const Menu = props => {
   }
 
   return (
-    <form onSubmit={play}>
-      <b>Select level</b>
+    <form className="menu" onSubmit={play}>
+      <b className="menu-title">Select level</b>
 
-      {props.sizes.map(s =>
-        <div key={s.value} className="size-option">
-          <label>
-            <input required name="size" type="radio" value={s.value}/><span>{s.label}</span>
-          </label>
-        </div>
-      )}
-      <button type="submit">Start</button>
+      <div className="menu-sizes">
+        {props.sizes.map(s =>
+          <div key={s.value} className="size-option">
+            <label>
+              <input required name="size" type="radio" value={s.value}/><span>{s.label}</span>
+            </label>
+          </div>
+        )}
+      </div>
+      <button className="menu-submit" type="submit">Start</button>
     </form>
   )
 }

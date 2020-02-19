@@ -1,3 +1,19 @@
 .App {
   text-align: center;
+  padding: 30px;
+}
+
+.App-header {
+  margin-bottom: 20px;
+}
+
+.App-name {
+  margin-top: 0;
+}
+
+.App-footer {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
 }
