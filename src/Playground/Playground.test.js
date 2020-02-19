@@ -88,6 +88,7 @@ describe('renders playground api test', () => {
 
     fireEvent.click(buttons[0])
     expect(statusElement).toHaveClass('lose')
+    expect(statusElement).not.toHaveClass('win playing')
     expect(buttons[0]).toHaveClass('clicked bomb boom')
     expect(buttons[1]).toHaveClass('clicked bomb')
     expect(buttons[2]).toHaveClass('clicked bomb')
@@ -116,5 +117,6 @@ describe('renders playground api test', () => {
 
     fireEvent.click(buttons[3])
     expect(statusElement).toHaveClass('win')
+    expect(statusElement).not.toHaveClass('lose playing')
   })
 })
