@@ -6,10 +6,10 @@ import {
   isRevealedAllHints,
   spreadEmptySurroundButtons,
   hhmmss
-} from './utils'
+} from '../utils'
 import './Playground.css'
-import Button from './Button'
-import EndGameModal from './EndGameModal'
+import Button from '../Button/Button'
+import EndGameModal from '../EndGameModal/EndGameModal'
 
 const Playground = props => {
   const [elapsedTime, setElapsedTime] = useState(0)

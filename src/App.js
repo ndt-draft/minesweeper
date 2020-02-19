@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Playground from './Playground'
-import Menu from './Menu'
+import Playground from './Playground/Playground'
+import Menu from './Menu/Menu'
 import './App.css';
 
 function App() {
