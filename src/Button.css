@@ -5,6 +5,9 @@
   outline: none;
   background-color: #ccc;
   box-shadow: inset 2px 2px 2px white;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: 7px;
 }
 
 .clicked {
@@ -14,7 +17,9 @@
 
 .bomb {
   background-image: url(./images/bomb.png);
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: 7px;
+  
+}
+
+.boom {
+  background-color: red;
 }

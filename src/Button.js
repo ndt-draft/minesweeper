@@ -20,7 +20,8 @@ const Button = props => {
       square: true,
       clicked: props.clicked,
       hint: props.clicked && props.hint,
-      bomb: props.clicked && props.mine
+      bomb: props.clicked && props.mine,
+      boom: props.clicked && props.mine && props.boom
     })} onClick={props.clickButton}>
       &nbsp;
       {getButtonText()}

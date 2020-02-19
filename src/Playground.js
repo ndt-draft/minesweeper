@@ -39,9 +39,11 @@ const Playground = props => {
     setData(makeGameData(props.size, props.mines))
   }
 
-  const loseGame = () => {
+  const loseGame = (boomButton) => {
+    let newData = revealAllMines(data)
+    newData[boomButton.x][boomButton.y].boom = true
     setStatus('lose')
-    setData(revealAllMines(data))
+    setData(newData)
   }
 
   const winGame = () => {
@@ -63,7 +65,7 @@ const Playground = props => {
 
     // click on mine
     if (button.mine) {
-      loseGame()
+      loseGame(button)
       return
     }
 
@@ -110,7 +112,7 @@ const Playground = props => {
       <header className="playground-header">
         <button className={'status ' + status} onClick={resetGame}/>
         <span className="elapsed-time">
-          <span role="img" aria-label="img">&#9200;</span>{hhmmss(elapsedTime, 3)}
+          <span role="img" aria-label="img">&#9200; </span>{hhmmss(elapsedTime, 3)}
         </span>
       </header>
       {data.map((row, rowIndex) =>

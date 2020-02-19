@@ -9,6 +9,7 @@ const EndGameModal = ({isWinOrLose, title, resetGame, changeLevel}) => {
       onRequestClose={resetGame}
       overlayClassName="modal-overlay"
       className="modal-content"
+      ariaHideApp={false}
     >
       <h3>{title}</h3>
       <div className="modal-button">
