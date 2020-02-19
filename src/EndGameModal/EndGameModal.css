@@ -14,7 +14,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid #ccc;
-  background: rgba(255, 255, 255, 0.95);
+  background: #fff;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: 4px;
