@@ -7,12 +7,8 @@ const Menu = props => {
     props.setSize(Number(e.target.elements.size.value))
   }
 
-  const changeLevel = () => {
-    props.setSize(null)
-  }
-
   if (props.size !== null) {
-    return <button onClick={changeLevel}>Change level</button>
+    return <button onClick={props.changeLevel}>Change level</button>
   }
 
   return (

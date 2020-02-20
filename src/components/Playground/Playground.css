@@ -9,7 +9,7 @@
 }
 
 .status {
-  background-image: url('../images/sun.png');
+  background-image: url('../../images/sun.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 32px;

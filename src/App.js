@@ -1,34 +1,24 @@
-import React, {useState} from 'react';
-import Playground from './Playground/Playground'
-import Menu from './Menu/Menu'
-import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux'
+import Game from './containers/game'
 
-function App() {
-  const sizes = [
-    {
-      label: 'Beginner 9x9',
-      value: 9
-    },
-    {
-      label: 'Advance 16x16',
-      value: 16
-    }
-  ]
-  const [size, setSize] = useState(null)
+import './App.css'
 
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2 className="App-name">Minesweeper</h2>
-      </header>
+    <Provider store={props.store}>
+      <div className="App">
+        <header className="App-header">
+          <h2 className="App-name">Minesweeper</h2>
+        </header>
 
-      {size && <Playground size={size} setSize={setSize}/>}
-      <Menu sizes={sizes} size={size} setSize={setSize}/>
+        <Game/>
 
-      <footer className="App-footer">
-        Made by <a href="https://github.com/thanh4890">thanh4890</a> with &hearts;
-      </footer>
-    </div>
+        <footer className="App-footer">
+          Made by <a href="https://github.com/thanh4890">thanh4890</a> with &hearts;
+        </footer>
+      </div>
+    </Provider>
   );
 }
 
