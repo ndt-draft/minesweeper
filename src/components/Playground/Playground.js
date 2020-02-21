@@ -31,7 +31,7 @@ const Playground = props => {
       <header className="playground-header">
         <button className={'status ' + props.status} onClick={props.resetGame}/>
         <span className="elapsed-time">
-          <span role="img" aria-label="img">&#9200; </span>{hhmmss(props.elapsedTime, 3)}
+          <span role="img" aria-label="img">&#9200; </span>{hhmmss(props.elapsedTime)}
         </span>
       </header>
       {props.data.map((row, rowIndex) =>

@@ -23,7 +23,7 @@ export const setSize = size => ({
 
 // Thunks
 export const fetchMines = size => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     dispatch(setGameData({loading: true}))
 
     try {
@@ -154,7 +154,7 @@ const ACTION_HANDLERS = {
 }
 
 // Reducer
-const initialState = {
+export const initialState = {
   sizes: [
     {
       label: 'Beginner 9x9',

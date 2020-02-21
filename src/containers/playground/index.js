@@ -33,7 +33,7 @@ const PlaygroundContainer = props => {
 
   return loading ?
     <div className="loading">Loading...</div> :
-    <Playground {...props}/>
+    <Playground {...props} />
 }
 
 const mapStateToProps = state => ({
