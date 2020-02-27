@@ -37,7 +37,8 @@ test('renders loading playground', () => {
   const store = mockStore({
     game: {
       ...initialState,
-      size: 9
+      size: 9,
+      loading: true
     }
   })
   const { getByText } = render(<Playground store={store}/>);

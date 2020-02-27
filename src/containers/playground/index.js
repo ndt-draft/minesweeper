@@ -31,9 +31,11 @@ const PlaygroundContainer = props => {
     return <div/>
   }
 
-  return loading ?
-    <div className="loading">Loading...</div> :
-    <Playground {...props} />
+  if (loading) {
+    return <div className="loading">Loading...</div>
+  }
+
+  return <Playground {...props} />
 }
 
 const mapStateToProps = state => ({
